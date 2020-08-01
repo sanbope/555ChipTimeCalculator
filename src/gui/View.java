@@ -54,7 +54,7 @@ public class View extends JFrame
 			count++;
 		} else
 		{
-			changeResistorColor(Integer.parseInt(txtResistor.getText()));
+			changeResistorColor(txtResistor.getText());
 		}
 		if (capacitor.isEmpty())
 		{
@@ -81,7 +81,7 @@ public class View extends JFrame
 					uF = (Double.parseDouble(capacitor) / Math.pow(10, 6));
 					result = s / uF;
 					unit = "ohm";
-					changeResistorColor((int) result);
+					changeResistorColor(""+((int) result));
 				} else if (capacitor.isEmpty())
 				{
 					s = Double.parseDouble(time);
@@ -150,16 +150,16 @@ public class View extends JFrame
 		String value = "" + cbColor1.getSelectedIndex();
 		value += cbColor2.getSelectedIndex();
 
-		String zero = "" + (Math.pow(10, (cbColor3.getSelectedIndex())));
+		String zero = "" + (new DecimalFormat("#.####################################").format(Math.pow(10, (cbColor3.getSelectedIndex()))));
 
 		value += zero.replace("1", "").replace(".0", "");
 		
 		return value;
 	}
 
-	private void changeResistorColor(int value)
+	private void changeResistorColor(String value)
 	{
-		String v = "" + value;
+		String v = value;
 
 		int count = 0;
 		for (int i = 0; i < v.length(); i++)
@@ -302,6 +302,8 @@ public class View extends JFrame
 			}
 		});
 		btnCalculate.setBounds(90, 115, 97, 25);
+		btnCalculate.setFocusable(false);
+		btnCalculate.setFocusPainted(false);
 		contentPane.add(btnCalculate);
 
 		lblResult = new JLabel("");
@@ -398,6 +400,8 @@ public class View extends JFrame
 			}
 		});
 		btnCopy.setBounds(570, 72, 97, 25);
+		btnCopy.setFocusable(false);
+		btnCopy.setFocusPainted(false);
 		contentPane.add(btnCopy);
 	}
 }
